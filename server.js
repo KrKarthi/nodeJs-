@@ -2,6 +2,7 @@ const express=require('express');
 const hbs=require('hbs');
 var app=express();
 var fs=require('fs');
+const port=process.env.port || 3000;
 
 app.set('view Engine','hbs');
 hbs.registerPartials(__dirname+'/views/partials')
@@ -16,9 +17,10 @@ fs.appendFile('server.log',log+'\n',(err)=>{
 });
 next();
 });
-app.use((req,res,next)=>{
-    res.render('maintenance.hbs')
-    });
+
+// app.use((req,res,next)=>{
+//     res.render('maintenance.hbs')
+//     });
 
 hbs.registerHelper('getCurrentYear',()=>{
     return new Date().getFullYear();
@@ -46,6 +48,6 @@ app.get('/bad',(req,res)=>{
 })
 
 
-app.listen(3000,()=>{
-    console.log("Server is running");
+app.listen(port,()=>{
+    console.log("Server is running"+port);
 });
