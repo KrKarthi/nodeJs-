@@ -2,7 +2,7 @@ const express=require('express');
 const hbs=require('hbs');
 var app=express();
 var fs=require('fs');
-const part1=process.env.PORT;
+const part1=process.env.PORT ||3000;
 
 app.set('view Engine','hbs');
 hbs.registerPartials(__dirname+'/views/partials')
@@ -43,6 +43,13 @@ app.get('/',(req,res)=>{
         pageTitle:'About Page',  
        });
         })
+
+        app.get('/project',(req,res)=>{
+            res.render('project.hbs',{
+             pageTitle:'Project Page',  
+            });
+             })    
+
 app.get('/bad',(req,res)=>{
     res.send({ErrorMessage:'Bad request'})
 })
